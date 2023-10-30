@@ -1,0 +1,5 @@
+#!/bin/bash
+
+adress=$(echo "" | rofi -dmenu -p "Add address:")
+name=$(echo "" | rofi -dmenu -p "Add name:")
+echo "$adress | $name" >> /home/johannes/jojects/joscripts/mybookmarks

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+
+# Options for powermenu
+gb="    English (GB)"
+de="    Deutsch"
+fa="    Farsi (ir)"
+ru="    Russian"
+mo="    Mongolian"
+pinyin="    pinyin"
+
+# Get answer from user via rofi
+selected_option=$(echo "$gb
+$de
+$fa
+$ru
+$mo
+$pinyin" | rofi -dmenu\
+                  -i\
+                  -p "Language"\
+                  -font "Cascadia Code 26"\
+                  -lines 5\
+                  -line-margin 3\
+                  -line-padding 10\
+                  -scrollbar-width "0" )
+                  # -width "15"\
+                  # -config "~/.config/rofi/powermenu.rasi"\
+
+# Do something based on selected option
+if [ "$selected_option" == "$gb" ]
+then
+    setxkbmap gb
+
+elif [ "$selected_option" == "$de" ]
+then
+    setxkbmap de
+elif [ "$selected_option" == "$fa" ]
+then
+    setxkbmap ir
+elif [ "$selected_option" == "$ru" ]
+then
+    setxkbmap ru
+elif [ "$selected_option" == "$mo" ]
+then
+    setxkbmap mn
+elif [ "$selected_option" == "$pinyin" ]
+then
+    # ibus-daemon &
+    ibus engine libpinyin
+else
+    echo "No match"
+fi
+echo "I have finished"
+xmodmap /home/johannes/.Xmodmap
+echo "I have finished xmodmap"
+setxkbmap -option caps:swapescape
